@@ -103,10 +103,8 @@ galleryRef.append(...galleryItemsRef);
 
 galleryRef.addEventListener('click', onOpenModal);
 closeModalBtn.addEventListener('click', onCloseModal);
-lightboxContentRef.addEventListener('click', onOverlayClick);
+// lightboxContentRef.addEventListener('click', onOverlayClick);
 
-galleryRef.addEventListener('keydown', onArrowRight);
-galleryRef.addEventListener('keydown', onArrowLeft);
 
 function onArrowRight(event) {
     if (event.code === 'ArrowRight') {
@@ -120,11 +118,11 @@ function onArrowLeft(event) {
     }
 }
 
-function onOverlayClick(event) {
-    if (event.target === event.currentTarget) {
-        onCloseModal();
-    }
-}
+// function onOverlayClick(event) {
+//     if (event.target === event.currentTarget) {
+//         onCloseModal();
+//     }
+// }
 
 function onPressEsc(event) {
     if (event.code === 'Escape') {
@@ -176,6 +174,8 @@ function onOpenModal(event) {
     lightBoxRef.classList.add('is-open');
     lightboxImageRef.src = event.target.getAttribute('data-source');
     lightboxImageRef.alt = event.target.alt;
+    galleryRef.addEventListener('keydown', onArrowRight);
+    galleryRef.addEventListener('keydown', onArrowLeft);
 }
 
 function onCloseModal() {
@@ -183,4 +183,6 @@ function onCloseModal() {
     lightBoxRef.classList.remove('is-open');
     lightboxImageRef.src = '';
     lightboxImageRef.alt = '';
+    galleryRef.removeEventListener('keydown', onArrowRight);
+    galleryRef.removeEventListener('keydown', onArrowLeft);
 }
